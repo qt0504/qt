@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卿涛时间轴</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fef7f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff9bc9 0%, #6ecbf5 100%);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .heart-icon {
+            color: #ff4081;
+            margin: 0 10px;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.1); }
+            10% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            20% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* 时间轴中心线 */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(to bottom, #ff9bc9, #6ecbf5);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+        
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            /* 确保卡片直接显示 */
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 交错排列 */
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        /* 卡片样式 */
+        .card {
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .timeline-item:nth-child(odd) .card {
+            background: linear-gradient(135deg, #ffebf3 0%, #ffe4f1 100%);
+            border-left: 6px solid #ff4081;
+        }
+        
+        .timeline-item:nth-child(even) .card {
+            background: linear-gradient(135deg, #e6f7ff 0%, #e1f4ff 100%);
+            border-left: 6px solid #6ecbf5;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .card p {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* 时间轴节点 */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border: 5px solid;
+            border-radius: 50%;
+            top: 40px;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            border-color: #ff4081;
+            right: -12px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            border-color: #6ecbf5;
+            left: -12px;
+        }
+                
+        /* 底部说明 */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.95rem;
+        }
+                        
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+                /*padding:12px 25px 12px 70px;*/
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                left: 18px;
+            }
+            
+            .timeline-item:nth-child(odd) .date,
+            .timeline-item:nth-child(even) .date {
+                left: 15px;
+                top: 12px;
+                right: auto;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 页面头部 -->
+        <header>
+            <h1> 更多美好等待记录... </h1>
+            <p>这是一个记录卿涛同台的时间轴，点击卡片可以跳转到对应的视频页面。</p>
+            <p>如未跳转，即只有图片or文字记录</p>
+        </header>
+        
+        <!-- 时间轴 -->
+        <div class="timeline">
+            
+            <!-- 微博：2024-04-11  认识你真好 -->
+            <div class="timeline-item" >
+                <div class="date">2024-04-11</div>
+                <div class="card" data-platform="weibo" data-weibo-id="5175088278863906">
+                    <h2>认识你真好</h2>
+                    <p>有一种目光不远不近，</p>
+                    <p>却一直守望；</p>
+                    <p>有一种朋友不惊不扰，</p>
+                    <p>却一直陪同；</p>
+                    <p>……</p>                    
+                </div>
+            </div>           
+
+            <!-- 文字图片：2016-12-03  文联十代、作协九代联欢晚会 -->
+            <div class="timeline-item" >
+                <div class="date">2016-12-03</div>
+                <div class="card" >
+                    <h2>文联十代、作协九代联欢晚会</h2>
+                </div>
+            </div>
+
+            <!-- 文字图片：2016-11-30  文联十代、作协九代开幕 -->
+            <div class="timeline-item" >
+                <div class="date">2016-11-30</div>
+                <div class="card" >
+                    <h2>文联十代、作协九代开幕</h2>
+                    <p>新闻联播镜头</p>
+                </div>
+            </div>
+
+            <!-- 文字图片：2016-11-04  中国宋庆龄基金会第七届理事会第一次会议 -->
+            <div class="timeline-item" >
+                <div class="date">2016-11-04</div>
+                <div class="card" >
+                    <h2>中国宋庆龄基金会第七届理事会第一次会议</h2>
+                    <p>新闻联播镜头</p>
+                </div>
+            </div>
+
+            <!-- B站：2016-06-18  伟大的旗帜 -->
+            <div class="timeline-item" >
+                <div class="date">2016-06-18</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1fW4y1Q7n6">
+                    <h2>伟大的旗帜</h2>
+                    <p>时代有你，开天辟地</p>      
+                </div>
+            </div>
+            
+            <!-- B站：2016-05-26  嘉兴的雨 -->
+            <div class="timeline-item" >
+                <div class="date">2016-05-26</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1os411v7JR">
+                    <h2>嘉兴的雨</h2>           
+                </div>
+            </div>           
+
+            <!-- B站：2016-02-21  元宵 -->
+            <div class="timeline-item" >
+                <div class="date">2016-02-21</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1ps411y731">
+                    <h2>元宵</h2>
+                    <p>2005-2011，2016同台</p>
+                    <p>周涛</p>          
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Yx411d7K4">
+                    <p>董卿</p>          
+                </div>
+            </div> 
+
+            <!-- B站：2016-02-07  春晚 -->
+             <div class="timeline-item" >
+                <div class="date">2016-02-07</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1cE411a7TQ">
+                    <h2>春晚</h2>
+                    <p>2005-2011，2016同台</p>
+                    <p>周涛  暂无cut合集</p>            
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Ht4y1S7no">
+                    <p>董卿</p>            
+                </div>
+            </div>
+
+            <!-- B站：2016-01-18  东西南北贺新春 -->
+            <div class="timeline-item" >
+                <div class="date">2016-01-18</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1ts411q7X2">
+                    <h2>东西南北贺新春</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1ps411q7k4">
+                    <p>董卿</p>            
+                </div>
+            </div>
+
+            <!-- B站：2016-01-16  百花迎春 -->
+            <div class="timeline-item" >
+                <div class="date">2016-01-16</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Ms41117Hk">
+                    <h2>百花迎春</h2>
+                    <p>2016、2013、2012、2010、2009、2007同台</p>
+                    <p>周涛</p>            
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1xs411q7Si">
+                    <p>董卿  暂无cut合集</p>            
+                </div>
+            </div>
+
+            <!-- B站：2015-11-29  共筑中国梦 -->
+            <div class="timeline-item" >
+                <div class="date">2015-11-29</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1ts411q7Un">
+                    <h2>共筑中国梦</h2>
+                    <p>周涛</p>          
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Ds411e75L">
+                    <p>董卿</p>          
+                </div>
+            </div>
+
+            <!-- B站：2014-01-29  东西南北贺新春 -->
+            <div class="timeline-item" >
+                <div class="date">2014-01-29</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Vs411q7yi">
+                    <h2>东西南北贺新春</h2>
+                    <p>周涛</p>          
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Es411q7ZD">
+                    <p>董卿</p>          
+                </div>
+            </div>
+
+            <!-- B站：2013-12-31  启航2014 -->
+            <div class="timeline-item" >
+                <div class="date">2013-12-31</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Es411v7tb">
+                    <h2>启航2014</h2>           
+                </div>
+            </div>
+
+            <!-- B站：2013-12-14  直通春晚 -->
+            <div class="timeline-item" >
+                <div class="date">2013-12-14</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1ss41197uk">
+                    <h2>直通春晚</h2>           
+                </div>
+            </div>
+
+            <!-- 文字图片：2013-11-18  中央电视台2014黄金资源广告招标会 -->
+            <div class="timeline-item" >
+                <div class="date">2013-11-18</div>
+                <div class="card" >
+                    <h2>中央电视台2014黄金资源广告招标会</h2>
+                </div>
+            </div>
+
+            <!-- 文字图片：2013-09-10  雷锋小学教师节 -->
+            <div class="timeline-item" >
+                <div class="date">2013-09-10</div>
+                <div class="card" >
+                    <h2>雷锋小学教师节</h2>
+                    <p>新闻镜头</p>
+                </div>
+            </div>
+
+            <!-- B站：2013-04-26  中国梦，劳动美 -->
+            <div class="timeline-item" >
+                <div class="date">2013-04-26</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1fs411e7AJ">
+                    <h2>中国梦，劳动美</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1xs411q7Si">
+                    <p>董卿  暂无cut</p>
+                </div>
+            </div>
+
+            <!-- B站：2013-04-21  《给你我的爱》 -->
+            <div class="timeline-item" >
+                <div class="date">2013-04-21</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1wp4y1i7Kq">
+                    <h2>《给你我的爱》</h2>           
+                </div>
+                
+            </div>
+
+            <!-- B站：2013-02-11  万家灯火平安夜 -->
+            <div class="timeline-item" >
+                <div class="date">2013-02-11</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Xs41147jw">
+                    <h2>万家灯火平安夜</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1xs411q7Si">
+                    <p>董卿  暂无cut</p>
+                </div>
+            </div>
+
+            <!-- B站：2013-01-22  《生活就是舞台》 -->
+            <div class="timeline-item" >
+                <div class="date">2013-01-22</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1bs411y7DK">
+                    <h2>《生活就是舞台》</h2>           
+                </div>
+            </div>
+
+            <!-- B站：2013-01-20  金话筒奖 -->
+            <div class="timeline-item" >
+                <div class="date">2013-01-20</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Ws411v7Jy">
+                    <h2>金话筒奖</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1ms411y74C">
+                    <p>董卿</p>
+                </div>
+            </div>
+
+            <!-- B站：2012-10-20  领航中国 -->
+            <div class="timeline-item" >
+                <div class="date">2012-10-20</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Qs411v7qD">
+                    <h2>领航中国</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1cA411N7vU">
+                    <p>董卿</p>
+                </div>
+            </div>
+
+            <!-- B站：2012-09-24  为祖国放歌“五个一工程” -->
+            <div class="timeline-item" >
+                <div class="date">2012-09-24</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV13s41117zg">
+                    <h2>为祖国放歌“五个一工程”</h2>          
+                </div>
+            </div>
+
+            <!-- B站：2012-07-05  北京祝福你 -->
+            <div class="timeline-item" >
+                <div class="date">2012-07-05</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1bs411y7ob">
+                    <h2>北京祝福你</h2>          
+                </div>
+            </div>
+
+            <!-- B站：2012-06-30  香港回归15周年 -->
+            <div class="timeline-item" >
+                <div class="date">2012-06-30</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV16s411Q7xo">
+                    <h2>香港回归15周年</h2>           
+                </div>
+            </div>
+
+            <!-- B站：2012-05-23  为人民放歌 -->
+            <div class="timeline-item" >
+                <div class="date">2012-05-23</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Hs41117vK">
+                    <h2>为人民放歌</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1ms411y7y2">
+                    <p>董卿</p>
+                </div>
+            </div>
+
+            <!-- B站：2012-04-08  22届星光奖颁奖晚会 -->
+            <div class="timeline-item" >
+                <div class="date">2012-04-08</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1DozhYkEcz">
+                    <h2>22届星光奖颁奖晚会</h2>          
+                </div>
+            </div>           
+
+            <!-- B站：2011-12-31  启航2012 -->
+            <div class="timeline-item" >
+                <div class="date">2011-12-31</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Ks411v7UL">
+                    <h2>启航2012</h2>           
+                </div>
+            </div>
+
+            <!-- 文字图片：2011-11-25  文联九代、作协八代 -->
+            <div class="timeline-item" >
+                <div class="date">2011-11-25</div>
+                <div class="card" >
+                    <h2>文联九代、作协八代</h2>
+                </div>
+            </div>
+
+            <!-- B站：20111010-20111013  第六届CCTV电视节目主持人大赛 -->
+            <div class="timeline-item" >
+                <div class="date">20111010-20111013</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1zs41167KP">
+                    <h2>第六届CCTV电视节目主持人大赛</h2>   
+                </div>
+            </div>
+
+            <!-- B站：2011-09-12  万家邀明月 -->
+            <div class="timeline-item" >
+                <div class="date">2011-09-12</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Xs41167xo">
+                    <h2>万家邀明月</h2>   
+                </div>
+            </div>
+
+            <!-- B站：2011-07-12  心连心 河北涉县 -->
+            <div class="timeline-item" >
+                <div class="date">2011-07-12</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV12QE5zUEah">
+                    <h2>心连心 河北涉县</h2>   
+                </div>
+            </div>
+
+            <!-- B站：20110627-20110706  放歌九十年   -->
+            <div class="timeline-item" >
+                <div class="date">20110627-20110706</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Es411W7aC">
+                    <h2>放歌九十年</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1yb411i7YE">
+                    <p>董卿  无cut合集</p>
+                </div>
+            </div>
+
+            <!-- B站：2011-05-12  中国奇迹 -->
+            <div class="timeline-item" >
+                <div class="date">2011-05-12</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1fs411y7Mg">
+                    <h2>中国奇迹</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card">
+                    <p>董卿  无cut合集</p>
+                </div>
+            </div>
+
+            <!-- B站：2011-05-01  劳动颂歌 -->
+            <div class="timeline-item" >
+                <div class="date">2011-05-01</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1mT4y1r7LF">
+                    <h2>劳动颂歌</h2>       
+                </div>
+            </div>
+
+            <!-- B站：2011  元宵幕后 -->
+            <div class="timeline-item" >
+                <div class="date">2011</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV187411N7QU">
+                    <h2>元宵幕后</h2>   
+                </div>
+            </div>
+
+            <!-- 文字图片：2010-11-12  广州亚运会开幕式  -->
+            <div class="timeline-item" >
+                <div class="date">2010-11-12</div>
+                <div class="card" >
+                    <h2>广州亚运会开幕式</h2>
+                    <p>主播场外解说，主任场内主持司仪</p>
+                </div>
+            </div>
+          
+            <!-- B站：2010-08-21  心连心 深圳特区 -->
+            <div class="timeline-item" >
+                <div class="date">2010-08-21</div>
+                <div class="card">
+                    <h2>心连心 深圳特区</h2>
+                    <p>周涛  有cut，没翻到</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV16s41167GR">
+                    <p>董卿</p>
+                </div>
+            </div>
+
+            <!-- B站：2010-06-06  心连心 湖北黄冈 -->
+            <div class="timeline-item" >
+                <div class="date">2010-06-06</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1BJ4m1V7bj">
+                    <h2>心连心 湖北黄冈</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV16s41167GR">
+                    <p>董卿</p>
+                </div>
+            </div>
+
+            <!-- B站：2010-05-21  欢声笑语 -->
+            <div class="timeline-item" >
+                <div class="date">2010-05-21</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1fs411X7f6">
+                    <h2>欢声笑语</h2>   
+                </div>
+            </div>
+
+            <!-- B站：2010-04-20  情系玉树 大爱无疆 -->
+            <div class="timeline-item" >
+                <div class="date">2010-04-20</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1fs411y7Mg">
+                    <h2>情系玉树 大爱无疆</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1S14y1K7y7">
+                    <p>董卿</p>
+                </div>
+            </div>
+
+
+            <!-- 文字图文：2010-04-11  青歌赛启动仪式 -->
+            <div class="timeline-item" >
+                <div class="date">2010-04-11</div>
+                <div class="card" >
+                    <h2>青歌赛启动仪式</h2>
+                    <p>记得有cut，没翻到</p>
+                </div>
+            </div>
+
+            <!-- B站：2009-10-03  为祖国喝彩 -->
+            <div class="timeline-item" >
+                <div class="date">2009-10-03</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Ns411s71G">
+                    <h2>为祖国喝彩</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1dPq8YGE14">
+                    <p>董卿  cut不全</p>
+                </div>
+            </div>
+
+            <!-- B站：2009-09-29  祖国万岁 -->
+            <div class="timeline-item" >
+                <div class="date">2009-09-29</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1rs41167Rt">
+                    <h2>祖国万岁</h2>       
+                </div>
+            </div>
+
+            <!-- B站：2009-09-22  时代领跑者 -->
+            <div class="timeline-item" >
+                <div class="date">2009-09-22</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1UZtyzbE4c">
+                    <h2>时代领跑者</h2>       
+                </div>
+            </div>
+
+            <!-- B站：2009-09-20  我们共同走过 -->
+            <div class="timeline-item" >
+                <div class="date">2009-09-20</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1cs411t7gL">
+                    <h2>我们共同走过</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card">
+                    <p>董卿  未查询到cut</p>
+                </div>
+            </div>
+
+            <!-- B站：2009-09-04  爱国歌曲大家唱 -->
+            <div class="timeline-item" >
+                <div class="date">2009-09-04</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV19s411r7gY">
+                    <h2>爱国歌曲大家唱</h2>       
+                </div>
+            </div>
+
+            <!-- B站：2009-07-17  百花赋 庆祝中国文联成立60周年文艺晚会 -->
+            <div class="timeline-item" >
+                <div class="date">2009-07-17</div>
+                <div class="card">
+                    <h2>百花赋 庆祝中国文联成立60周年文艺晚会</h2>
+                    <p>周涛  未查询到cut</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Js411C7Vy">
+                    <p>董卿</p>
+                </div>
+            </div>
+
+            <!-- B站：2009-06-27  寻找成龙 -->
+            <div class="timeline-item" >
+                <div class="date">2009-06-27</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Xs4116747">
+                    <h2>寻找成龙</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1ns411t7Zn">
+                    <p>董卿</p>
+                </div>
+            </div>
+
+            <!-- 文字图片：2009-06-11  罗京 -->
+            <div class="timeline-item" >
+                <div class="date">2009-06-11</div>
+                <div class="card" >
+                    <h2>自行搜索，勿多言</h2>
+                    <p>关键词：20090611；罗京；央视</p>
+                </div>
+            </div>
+
+            <!-- B站：2009-05-10  心连心 汶川慰问 -->
+            <div class="timeline-item" >
+                <div class="date">2009-05-10</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1CvGbzNE9B">
+                    <h2>心连心 汶川慰问</h2> 
+                </div>
+            </div>
+
+            <!-- B站：2009  春节歌舞晚会 -->
+            <div class="timeline-item" >
+                <div class="date">2009</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1u4xLz3EYu">
+                    <h2>春节歌舞晚会</h2> 
+                </div>
+            </div>
+
+            <!-- B站：2008-08-08  北京奥运会开幕式 -->
+            <div class="timeline-item" >
+                <div class="date">2008-08-08</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1St4y1c75f">
+                    <h2>北京奥运会开幕式</h2>
+                    <p>周涛开幕前采访</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1u64y1x7NJ">
+                    <p>董卿热场</p>
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1XX4y1c7W5">
+                    <p>周涛解说</p>
+                </div>
+            </div>
+
+            <!-- B站：2008-08-24  北京奥运会闭幕式 -->
+            <div class="timeline-item" >
+                <div class="date">2008-08-24</div>
+                <div class="card" >
+                    <h2>北京奥运会闭幕式</h2>
+                    <p>无高清cut</p> 
+                </div>
+            </div> 
+
+            <!-- B站：2008-05-21  《我们手挽手》 -->
+            <div class="timeline-item" >
+                <div class="date">2008-05-21</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1xH4y1D7sa">
+                    <h2>《我们手挽手》</h2> 
+                </div>
+            </div> 
+
+            <!-- B站：2008-05-18  爱的奉献 -->
+            <div class="timeline-item" >
+                <div class="date">2008-05-18</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1fs411y7Mg">
+                    <h2>爱的奉献</h2>
+                    <p>周涛</p>           
+                </div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Ls41117nH">
+                    <p>董卿</p>
+                </div>
+            </div>
+             
+            <!-- B站：2008-05-18  爱的奉献幕后 -->
+            <div class="timeline-item" >
+                <div class="date">2008-05-18</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1QodVYqE3S">
+                    <h2>爱的奉献幕后</h2> 
+                </div>
+            </div>
+
+            <!-- B站：2007-12-14  第三届中国三亚国际电影广告艺术节颁奖晚会 -->
+            <div class="timeline-item" >
+                <div class="date">2007-12-14</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1m8hxz2EfL">
+                    <h2>第三届中国三亚国际电影广告艺术节颁奖晚会</h2> 
+                </div>
+            </div>
+
+            <!-- B站：2007-07-25  欢乐中国行 魅力宁国 -->
+            <div class="timeline-item" >
+                <div class="date">2007-07-25</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1ps411x7fE">
+                    <h2>欢乐中国行 魅力宁国</h2>
+                    <p>后续更换视频链接</p> 
+                </div>
+            </div>
+
+            <!-- B站：2007-05-01  迎奥运讲文明树新风公益广告之帮助篇 -->
+            <div class="timeline-item" >
+                <div class="date">2007-05-01</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Qt411L7PJ">
+                    <h2>迎奥运讲文明树新风公益广告之帮助篇</h2> 
+                </div>
+            </div>
+
+            <!-- B站：2007-04  欢乐中国行 外国人才艺展演 -->
+            <div class="timeline-item" >
+                <div class="date">2007-04</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1SC4y1s7js">
+                    <h2>欢乐中国行 外国人才艺展演</h2> 
+                </div>
+            </div>
+
+            <!-- B站：2006-11-08  首届中国电视观众节 激情飞扬 美丽相约 -->
+            <div class="timeline-item" >
+                <div class="date">2006-11-08</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1abpyzDEAU">
+                    <h2>首届中国电视观众节 激情飞扬 美丽相约</h2>
+                    <p>主任作为视频嘉宾出现</p>      
+                </div>
+            </div>
+
+            <!-- B站：2006  挑战主持人 -->
+            <div class="timeline-item" >
+                <div class="date">2006</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1As411X73z">
+                    <h2>挑战主持人</h2>
+                    <p>不同期节目，看视频简介</p>     
+                </div>
+            </div>
+
+            <!-- 文字图片：2006-03-17  浙江广电集团“四大主持”业态高峰论坛 -->
+            <div class="timeline-item" >
+                <div class="date">2006-03-17</div>
+                <div class="card" >
+                    <h2>浙江广电集团“四大主持”业态高峰论坛</h2>
+                    <p>昨日，浙江广电集团在杭州召开了“‘四大主持’业态高峰论坛”，
+                    特别邀请了央视“四大名嘴”——白岩松、董倩、董卿、周涛及国内播音主持理论研究专家</p>
+                </div>
+            </div>
+
+            <!-- B站：2006  春晚幕后采访 -->
+            <div class="timeline-item" >
+                <div class="date">2006</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV13g4y1o7bf">
+                    <h2>春晚幕后采访</h2>     
+                </div>
+            </div>
+
+            <!-- B站：20050615-20050621  第三届CCTV舞蹈大赛 -->
+            <div class="timeline-item" >
+                <div class="date">20050615-20050621</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Xs2SBGEH2">
+                    <h2>第三届CCTV舞蹈大赛</h2>      
+                </div>
+            </div>
+
+            <!-- 微博：2005-02-08  春节歌舞晚会 -->
+            <div class="timeline-item" >
+                <div class="date">2005-02-08</div>
+                <div class="card" data-platform="weibo" data-weibo-id="4500068066066443">
+                    <h2>春节歌舞晚会</h2>               
+                </div>
+            </div>
+
+            <!-- B站：2005-01-13  新年新诗会 -->
+            <div class="timeline-item" >
+                <div class="date">2005-01-13</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1QsdJYXEaG">
+                    <h2>新年新诗会</h2>
+                    <p>非同台</p>      
+                </div>
+            </div>
+
+            <!-- B站：2004  心连心 新疆兵团 -->
+            <div class="timeline-item" >
+                <div class="date">2004</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV15qHAz3EfR">
+                    <h2>心连心 新疆兵团</h2>
+                    <p>不同分会场录制</p>      
+                </div>
+            </div>
+
+            <!-- B站：《带着月光上路》 -->
+            <div class="timeline-item" >
+                <div class="date">未知</div>
+                <div class="card" data-platform="bilibili" data-bvid="BV1Fs411B7NW">
+                    <h2>《带着月光上路》</h2>    
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 页面页脚 -->
+        <footer>
+            <div class="container footer-content">               
+                <p>卿涛 &copy; 2026 | 记录值得珍藏的每一刻</p>
+                
+                <p>本页面仅供交流使用，视频版权归原作者所有</p>
+                
+                <div class="footer-links">
+                    <a href="#">联系站长：15235513525@163.com</a>
+                </div>
+
+            </div>
+                     
+        </footer>
+    </div>
+
+    <script>
+        // 为卡片添加点击效果
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                
+                // 点击效果
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+
+                // 根据平台类型跳转到对应视频
+                const platform = this.getAttribute('data-platform');
+                
+                if (platform === 'bilibili') {
+                    const bvid = this.getAttribute('data-bvid');
+                    if (bvid) {
+                        window.open(`https://www.bilibili.com/video/${bvid}`, '_blank');
+                    }
+                } else if (platform === 'weibo') {
+                    const weiboId = this.getAttribute('data-weibo-id');
+                    if (weiboId) {
+                        window.open(`https://weibo.com/tv/show/1034:${weiboId}`, '_blank');
+                    }
+                }
+
+            });
+        });
+        
+    </script>
+</body>
+</html>
