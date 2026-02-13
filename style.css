@@ -1,0 +1,347 @@
+/* style.css ———— 全局统一样式，所有分类页面共用 */
+/* 独立CSS文件，与HTML完全分离 */
+
+/* ========== 全局重置 & 粉丝向基调 ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #faf8f5;
+    color: #2e2e2e;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    animation: fadePage 0.2s ease;
+}
+
+@keyframes fadePage {
+    from { opacity: 0.7; }
+    to { opacity: 1; }
+}
+
+/* 统一容器：所有页面内容对齐 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 100%;
+}
+
+/* ========== 统一头部 & 导航 ========== */
+.site-header {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #f0eae4;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+    padding: 6px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 68px;
+    position: relative;
+}
+
+/* ----- 左侧粉丝图标 (完全图标化) ----- */
+.logo-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    font-weight: 630;
+    font-size: 1.35rem;
+    color: #c73a4b;
+    letter-spacing: 0.8px;
+}
+
+.logo-icon .icon {
+    font-size: 2.2rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 6px rgba(210, 80, 80, 0.2));
+}
+
+.logo-text {
+    background: linear-gradient(145deg, #d66a6a, #b33f4b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ----- 导航栏：绝对居中，圆角胶囊感 ----- */
+.main-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.6rem;
+    background: rgba(255, 245, 240, 0.7);
+    backdrop-filter: blur(16px);
+    padding: 0.5rem 1.8rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 220, 210, 0.4);
+    box-shadow: 0 6px 14px rgba(180, 120, 100, 0.04);
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #4d3a36;
+    font-weight: 550;
+    font-size: 1.08rem;
+    padding: 6px 2px;
+    border-bottom: 2px solid transparent;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.main-nav a:hover {
+    color: #c4424e;
+    border-bottom-color: #fba6a6;
+}
+
+/* 高亮当前页面 —— 由script.js动态添加active类，但保留静态备用 */
+.main-nav a.active {
+    color: #c73a4b;
+    border-bottom: 2px solid #c73a4b;
+    font-weight: 620;
+}
+
+/* 右侧占位，完全平衡左侧图标 */
+.header-right {
+    width: 58px;
+    visibility: hidden;
+}
+
+/* ========== 主体内容 ========== */
+.main-content {
+    flex: 1;
+    padding: 48px 0 60px;
+}
+
+/* 页面头部 (每个分类可不同) */
+.page-header {
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 2.3rem;
+    font-weight: 750;
+    color: #2f2721;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.page-desc {
+    font-size: 1.18rem;
+    color: #65544b;
+    border-left: 6px solid #ffbbb0;
+    padding-left: 22px;
+    background: linear-gradient(to right, #fdf6f2, #ffffff);
+    border-radius: 0 16px 16px 0;
+    line-height: 1.5;
+    margin-top: 8px;
+}
+
+/* ========== 粉丝向卡片网格 ========== */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 32px 26px;
+    margin-top: 24px;
+}
+
+.card {
+    background: white;
+    border-radius: 24px;
+    padding: 28px 16px 24px;
+    box-shadow: 0 12px 26px rgba(160, 100, 80, 0.04);
+    transition: all 0.18s;
+    border: 1px solid #ffe2dd;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 36px rgba(200, 120, 100, 0.08);
+    border-color: #ffc2ba;
+    background: #fffcfb;
+}
+
+.card-icon {
+    font-size: 2.9rem;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    font-size: 1.55rem;
+    font-weight: 620;
+    color: #523e38;
+    margin-bottom: 12px;
+    border-bottom: 2.5px solid #ffded5;
+    display: inline-block;
+    padding-bottom: 8px;
+    line-height: 1.2;
+}
+
+.card p {
+    color: #6b584e;
+    font-size: 0.98rem;
+    margin-bottom: 20px;
+    padding: 0 6px;
+}
+
+/* 静态按钮(无实际功能) */
+.btn {
+    background: #ffeae5;
+    color: #aa4250;
+    border: 1px solid #ffc2bc;
+    padding: 8px 24px;
+    border-radius: 40px;
+    font-weight: 590;
+    font-size: 0.92rem;
+    letter-spacing: 0.6px;
+    transition: 0.1s;
+    cursor: default;
+    display: inline-block;
+    margin-top: 4px;
+    box-shadow: 0 2px 6px rgba(200,120,100,0.02);
+}
+
+.btn:hover {
+    background: #ffdbd4;
+    border-color: #f59c9c;
+    color: #913844;
+}
+
+/* ========== 统一底部 ========== */
+.site-footer {
+    background: #ffffff;
+    border-top: 1px solid #f2e4df;
+    padding: 28px 0;
+    margin-top: auto;
+    color: #6e5a52;
+    text-align: center;
+}
+
+.footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-meta {
+    font-size: 0.9rem;
+    color: #a0877c;
+}
+
+/* ========== 响应式适配 ========== */
+@media (max-width: 860px) {
+    .main-nav {
+        gap: 1.4rem;
+        padding: 0.4rem 1rem;
+    }
+    .main-nav a {
+        font-size: 0.96rem;
+    }
+    .logo-text {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .header-inner {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .main-nav {
+        position: static;
+        transform: none;
+        left: 0;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 6px;
+    }
+    .logo-icon {
+        margin-right: auto;
+    }
+    .header-right {
+        display: none;
+    }
+    .page-title {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-nav {
+        gap: 0.9rem;
+        padding: 0.4rem 0.6rem;
+        flex-wrap: wrap;
+    }
+    .main-nav a {
+        font-size: 0.85rem;
+    }
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+/* 默认（电脑/大平板）：自动填充，每列最小260px */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 32px 26px;
+}
+
+/* 窄平板：三列，缩小最小宽度 */
+@media screen and (max-width: 900px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+}
+
+/* 大手机/小平板：两列 */
+@media screen and (max-width: 640px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    /* 上面给出的卡片内部缩小样式也加在这里 */
+}
+
+/* 小手机（极窄）：一列（保证内容可读） */
+@media screen and (max-width: 380px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;   /* 固定宽高比，防止图片变形 */
+        object-fit: cover;      /* 裁剪填充 */
+    }
+}
+
+}

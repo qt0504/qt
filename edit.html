@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剪辑</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+
+    <!-- 内部添加CSS -->
+    <style>
+        .card-cover {
+            width: 240px;          /* 固定宽度 */
+            height: 136px;          /* 固定高度，16:9比例 */
+            object-fit: cover;     /* 图片裁剪，不变形 */
+            border-radius: 8px;
+            background-color: #f5f5f5;  /* 占位背景 */
+        }
+
+        .card {
+            display: flex;         /* 弹性布局，图片和文字并排 */
+            gap: 16px;
+            align-items: center;
+            /* 其他样式保留 */
+        }
+
+        .card-info {
+            flex: 1;              /* 文字占满剩余宽度 */
+        }
+
+        .card h4 {
+            font-size: 1.1rem;
+            font-weight: 620;
+            color: #523e38;
+            margin-bottom: 12px;
+            border-bottom: 2.5px solid #ffded5;
+            display: inline-block;
+            padding-bottom: 8px;
+            line-height: 1.2;
+        }
+
+    </style>
+</head>
+
+<body id="page-edit">
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo-icon">
+                <!-- <span class="icon">🧡</span> -->
+                <span class="logo-text">卿涛</span>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link" data-page="home">首页</a>
+                <a href="video.html" class="nav-link" data-page="video">视频</a>
+                <a href="book.html" class="nav-link" data-page="book">图书</a>
+                <a href="edit.html" class="nav-link" data-page="edit">剪辑</a>
+                <a href="audio.html" class="nav-link" data-page="audio">音频</a>                
+            </nav>
+            <div class="header-right"></div>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        <div class="page-header">
+            <h1 class="page-title">✂️ 剪辑</h1>
+            <p class="page-desc">粉丝自制剪辑、混剪、滤镜调色。</p>
+        </div>
+        
+        <!-- 内容区 -->
+        <div class="card-grid">
+            
+            <!-- 《处处嗑》 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1yf4y1y79X">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/6f32759183219f9143b9e12386dd724cdf03fb5d.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>翻唱改编《处处嗑》</h4>
+                    <p>2020-06-18</p>
+                </div>
+            </div>
+
+            <!-- 同人曲•春意晚 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1UK41147H9">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/174b3d08bae54816897f1e55ab26b31b6cf21cea.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>同人曲•春意晚</h4>
+                    <p>2024-01-02</p>
+                </div>
+            </div>
+
+            <!-- 野心 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1Do4y167Yt">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/3da9959342de3d8b51546c0168652bfea9af24f5.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>“在对手里，你算可敬的宿敌”</h4>
+                    <p>2023-03-11</p>
+                </div>
+            </div>
+
+            <!-- 除君外｜无人与我共齐名 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1154y1Y7fs">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/49002358354c42aa739ab5c5984c648c8c582641.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>除君外｜无人与我共齐名</h4>
+                    <p>2021-02-25</p>
+                </div>
+            </div>
+
+            <!-- 告白之夜 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1Zz4y1k7Ue">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/8498e014cb38a09513346848dfcfc8495f83c1b5.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>告白之夜</h4>
+                    <p>2020-12-15</p>
+                </div>
+            </div>
+
+            <!-- 留不低·不如我们重新来过 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1ZW411i7DQ">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/8c54c9def908347d4cf75da6ab843370279519eb.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>留不低·不如我们重新来过</h4>
+                    <p>2018-01-11</p>
+                </div>
+            </div>
+
+            <!-- 白月光〖你是我不能言说的伤〗 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1WC4y1p7FC">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/ccdbc555af5409dc3bceaefbf0db68a2f70e87ab.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>白月光〖你是我不能言说的伤〗</h4>
+                    <p>2020-05-25</p>
+                </div>
+            </div>
+
+            <!-- “我与她的关系是上海与北京” -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1Su4y1Z7T1">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/0f76fbe589fff6cdb19bba2f2bcbe5270e18fdfd.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>“我与她的关系是上海与北京”</h4>
+                    <p>2023-06-09</p>
+                </div>
+            </div>
+
+            <!-- 【卿涛】牵手 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV12x41127nZ">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/84f8efa1481dba8332d669045b9463ca397ce658.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【卿涛】牵手</h4>
+                    <p>2017-05-01</p>
+                </div>
+            </div>
+
+            <!-- 【卿涛】刻在我心底的名字 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1aF411h7Nk">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/ee64020a2a9b33e9dea62a978db946d2af29bd3d.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【卿涛】刻在我心底的名字</h4>
+                    <p>2021-11-19</p>
+                </div>
+            </div>
+
+            <!-- 【卿涛】我们也很多很多年了…… -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1t44y1W7Hy">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/bfd71b2a62a6b416fae10fd6ffc884f9b438a72e.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【卿涛】我们也很多很多年了</h4>
+                    <p>2022-02-24</p>
+                </div>
+            </div>
+
+            <!-- 巧合的事多了就不是巧合 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1zb4y1D7eN">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/394454f54a031ca441f132414b4a380afbdff841.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>巧合的事多了就不是巧合</h4>
+                    <p>2021-04-12</p>
+                </div>
+            </div>
+
+
+            <!-- 总有一天她们会再次顶峰相见 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1h3411v7da">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/49bc4168325b6139f8beb419615ad4099d88a1bb.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>总有一天她们会再次顶峰相见</h4>
+                    <p>2021-12-30</p>
+                </div>
+            </div>
+
+            <!-- "事实上，我们平时的关系很好" -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1KS4y1v7jG">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/e5a51d2abbe46116dbc624fcdea953c9ce9cf685.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>“事实上，我们平时的关系很好”</h4>
+                    <p>2022-06-18</p>
+                </div>
+            </div>
+
+            <!-- "你看，她也不回应，我也不回应" -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1sV411s7FQ">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/85dc352336ad540485cd7bff5d52ffff6cdb747c.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>你看，她也不回应，我也不回应</h4>
+                    <p>2021-06-18</p>
+                </div>
+            </div>
+
+            <!-- “赢尽了天下输了她” -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1JN4y1V76x">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/a3554f1b6e8477f9d6b63d45e4fb2fea2333b2cc.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>“赢尽了天下输了她”</h4>
+                    <p>2022-08-14</p>
+                </div>
+            </div>
+
+            <!-- 【卿涛】我用什么把你留住 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1PS4y117zy">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/76544e82044ac9caaa4edecd48247183a5d280e4.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【卿涛】我用什么把你留住</h4>
+                    <p>2022-02-04</p>
+                </div>
+            </div>
+
+            <!-- 【卿涛】我不愿承认最后的结局 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1tE411A7V5">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/2d09a1d747ecd9538c6157c801d668370e0abc9f.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【卿涛】我不愿承认最后的结局</h4>
+                    <p>2020-03-21</p>
+                </div>
+            </div>
+
+            <!-- 【卿涛】盛世红颜赋 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1Fx411X7km">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/082b14c9e66032a49f19b9749355b235915b5ff6.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【卿涛】盛世红颜赋</h4>
+                    <p>2017-04-17</p>
+                </div>
+            </div>
+
+            <!-- 【卿涛】千秋入梦 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1f7411U7hY">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/f4a7ace47e4d8a653b9ddc0d1147c38ad07caabc.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【卿涛】千秋入梦</h4>
+                    <p>2020-03-30</p>
+                </div>
+            </div>
+
+            <!-- 【卿涛】仙才叹 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1Qs411c7Pn">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/6664ecb560cace85b79a02c4de0a18d80c179899.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【卿涛】仙才叹</h4>
+                    <p>2018-07-30</p>
+                </div>
+            </div>
+                                
+        </div>
+
+        <!-- 单人区 -->
+        <div class="card-grid">
+            
+            <!-- 周涛 | 追光者 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1ax411H7La">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/3fcfa4464eeffb24257fb50cd11f828c33c21e47.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>周涛 | 追光者</h4>
+                    <p>2017-08-02</p>
+                </div>
+            </div>
+
+            <!-- 董卿 | 无人诗 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1JM4m117D9">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/6ddb839254d910ab23f5d2d1576cf283886ca527.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>董卿 | 无人诗</h4>
+                    <p>2024-07-29</p>
+                </div>
+            </div>
+
+            <!-- 【借我】 周涛 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1At411L7Uc">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/d4e69abfa6981a46a1848a7d45a65ac5eebbb2d8.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【借我】 周涛</h4>
+                    <p>2019-07-12</p>
+                </div>
+            </div>
+
+            <!-- “ 推 我 入 深 渊 ” -->
+            <div class="card" data-platform="bilibili" data-bvid="BV14k4y1K7hd">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/9b3ec057f1d698928677c2dc2cccf6b22beeb3bc.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>“ 推 我 入 深 渊 ”</h4>
+                    <p>2023-07-05</p>
+                </div>
+            </div>
+
+            <!-- 在你告别春晚的快六年里·董卿 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1f14y1K7B8">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/70a2e24a71309c3238e15bd72226f7e81c9f3f42.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>在你告别春晚的快六年里·董卿</h4>
+                    <p>2022-12-10</p>
+                </div>
+            </div>
+
+            <!-- “如果太难过了，我们就不念了。” -->
+            <div class="card" data-platform="bilibili" data-bvid="BV13a411E7An">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/216a854211f6bb7090a8e8e3f05c1e4166c391d8.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>“如果太难过了，我们就不念了”</h4>
+                    <p>2022-05-24</p>
+                </div>
+            </div>
+
+            <!-- 董卿｜何生红颜你倾城 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1CW411j75g">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/3b1dbff3ca8c455e4cd3917c70b62f8dac5e694e.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>董卿｜何生红颜你倾城</h4>
+                    <p>2018-02-16</p>
+                </div>
+            </div>
+
+            <!-- 【周涛】起风了 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1rx411X7xY">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/b4b016d9ace6a763aa6cc96fb4674029eaee0817.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【周涛】起风了</h4>
+                    <p>2019-07-02</p>
+                </div>
+            </div>
+
+            <!-- 【周涛】2018生贺 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1FW411p7Qr">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/3fc70194686d15de03b673d9f9d7f2444995d8af.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【周涛】2018生贺</h4>
+                    <p>2018-03-23</p>
+                </div>
+            </div>
+
+            <!-- 【董卿｜我用什么把你留住】 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1pV4y1b7J2">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/d93e5d136d202cc4318fa2ee6ce4906ae8b7f85e.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【董卿｜我用什么把你留住】</h4>
+                    <p>2023-07-14</p>
+                </div>
+            </div>
+
+            <!-- 【董卿｜如果声音不记得｜2022生贺】 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1SM411k7ve">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/2cf12613670257876f1db03850b33a8643cb387e.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【董卿｜如果声音不记得】</h4>
+                    <p>2022-11-17</p>
+                </div>
+            </div>
+
+            <!-- 【董卿｜春晚｜一期一会】 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1FG4y197vC">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/a0387229293b99b4ab5d3f76ef2567886bc22261.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【董卿｜春晚｜一期一会】</h4>
+                    <p>2023-11-12</p>
+                </div>
+            </div>
+
+            <!-- 【董卿 | 精卫】央 视 唯 一 精 卫 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV18z4y1J7v5">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/13a8a27c5ae05ce3145a6dc27e459b174ecc2ba5.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【董卿|精卫】央视唯一精卫</h4>
+                    <p>2023-07-12</p>
+                </div>
+            </div>
+
+            <!-- “电视永远是一门遗憾的艺术” -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1P2stekE6k">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/26049d403d8f1b058504e685b2a10eadc09c284b.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>“电视永远是一门遗憾的艺术”</h4>
+                    <p>2024-08-27</p>
+                </div>
+            </div>
+
+            <!-- “她永远是王冠上最璀璨的明珠” -->
+            <div class="card" data-platform="bilibili" data-bvid="BV17X4y1h7dk">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/7c9e67f8874fbf16f200a84099efbdbeaf5098bf.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>“她永远是王冠上最璀璨的明珠”</h4>
+                    <p>2023-05-27</p>
+                </div>
+            </div>
+
+            <!-- 【董卿生贺】 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV19r4y1F7Y7">
+                <!-- ★ 新增图片行，src填你从B站复制的封面地址 -->
+                <img class="card-cover" 
+                    src="https://i1.hdslb.com/bfs/archive/e7fca6ec50cc80b16f01e47e4d46abba0fcf2a80.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【董卿生贺】</h4>
+                    <p>2020-11-17</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p class="footer-meta">卿涛 © 2026 | 仅供交流使用，视频版权归原作者所有</p>
+            <p>联系：15235513525@163.com</p>
+        </div>
+    </footer>
+
+    <!-- 内部js文件 -->
+    <script>
+
+        // DOM加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 卡片点击效果和跳转逻辑
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // 点击效果
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                    
+                    // 获取平台和视频ID
+                    const platform = this.getAttribute('data-platform');
+                    const bvid = this.getAttribute('data-bvid');
+                    const weiboId = this.getAttribute('data-weibo-id');
+                    
+                    // 根据平台跳转到对应视频
+                    if (platform === 'bilibili' && bvid) {
+                        window.open(`https://www.bilibili.com/video/${bvid}`, '_blank');
+                    } else if (platform === 'weibo' && weiboId) {
+                        window.open(`https://weibo.com/tv/show/1034:${weiboId}`, '_blank');
+                    }
+                });
+            });
+
+        });
+
+    </script>
+</body>
+</html>
