@@ -303,45 +303,4 @@ body {
     .card-grid {
         grid-template-columns: 1fr;
     }
-
-/* 默认（电脑/大平板）：自动填充，每列最小260px */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 32px 26px;
-}
-
-/* 窄平板：三列，缩小最小宽度 */
-@media screen and (max-width: 900px) {
-    .card-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-}
-
-/* 大手机/小平板：两列 */
-@media screen and (max-width: 640px) {
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-    }
-    /* 上面给出的卡片内部缩小样式也加在这里 */
-}
-
-/* 小手机（极窄）：一列（保证内容可读） */
-@media screen and (max-width: 380px) {
-    .card-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media screen and (max-width: 640px) {
-    .card img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 16 / 9;   /* 固定宽高比，防止图片变形 */
-        object-fit: cover;      /* 裁剪填充 */
-    }
-}
-
 }
