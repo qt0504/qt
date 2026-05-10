@@ -3,17 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
     <title>音频</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 
     <style>
         
-        .card h {
-            font-size: 1.3rem;
+        .card-cover {
+            width: 240px;          /* 固定宽度 */
+            height: 136px;          /* 固定高度，16:9比例 */
+            object-fit: cover;     /* 图片裁剪，不变形 */
+            border-radius: 8px;
+            background-color: #f5f5f5;  /* 占位背景 */
+        }
+
+        .card {
+            display: flex;         /* 弹性布局，图片和文字并排 */
+            gap: 16px;
+            align-items: center;
+            /* 其他样式保留 */
+        }
+
+        .card-info {
+            flex: 1;              /* 文字占满剩余宽度 */
+        }
+
+        .card h4 {
+            font-size: 1.1rem;
             font-weight: 620;
             color: #523e38;
             margin-bottom: 12px;
+            border-bottom: 2.5px solid #ffded5;
             display: inline-block;
             padding-bottom: 8px;
             line-height: 1.2;
@@ -46,39 +67,65 @@
         </div>
 
         <!-- 卡片区域：单独居中 -->
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+        <!-- <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
             <div class="card" style="max-width: 650px; width: 100%; text-align: center; padding: 40px;">
                 <h style="margin-top: 30px; color: #a97a6e;">建设中……</h>
-                <!-- <p style="margin-top: 30px; color: #a97a6e;">建设中……</p> -->
-            </div>
-        </div>
-        
-        <!-- <div class="card-grid">
-            <div class="card">
-                <div class="card-icon">💿</div>
-                <h3>正规四辑</h3>
-                <p>全专音源 + 伴奏合集 FLAC</p>
-                <span class="btn">收听</span>
-            </div>
-            <div class="card">
-                <div class="card-icon">🎙️</div>
-                <h3>Cover 翻唱</h3>
-                <p>粉丝翻唱精选，每月投票TOP3</p>
-                <span class="btn">播放</span>
-            </div>
-            <div class="card">
-                <div class="card-icon">🎧</div>
-                <h3>直播收音</h3>
-                <p>治愈向ASMR，清唱片段</p>
-                <span class="btn">静心听</span>
-            </div>
-            <div class="card">
-                <div class="card-icon">🎼</div>
-                <h3>应援曲</h3>
-                <p>原创/填翻应援歌单</p>
-                <span class="btn">听歌</span>
+                <p style="margin-top: 30px; color: #a97a6e;">建设中……</p>
             </div>
         </div> -->
+        
+        <div class="card-grid">
+            <!-- 【耳朵怀孕系列】周涛&董卿 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1Ws41197uL">
+                <img class="card-cover" 
+                    src="https://i0.hdslb.com/bfs/archive/082904f150c169486f89c3a174ed0685afee58ee.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【耳朵怀孕系列】周涛&董卿</h4>
+                    <p>2016-02-18</p>
+                </div>
+            </div>
+
+            <!-- 【周涛】朗诵合集 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1mE411T7BX">
+                <img class="card-cover" 
+                    src="https://i2.hdslb.com/bfs/archive/d9f4b346d82f6e002eadefe86f289646d3a619e3.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【周涛】朗诵合集</h4>
+                    <p>2020-03-24</p>
+                </div>
+            </div>
+
+            <!-- 【董卿】朗读合集（哄睡） -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1mg41157sX">
+                <img class="card-cover" 
+                    src="https://i2.hdslb.com/bfs/archive/62038dd54aa8af25c37cc65480c96754b31e0c2b.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【董卿】朗读合集（哄睡）</h4>
+                    <p>2021-08-21</p>
+                </div>
+            </div>
+
+            <!-- 【董卿】纯人声 朗读 -->
+            <div class="card" data-platform="bilibili" data-bvid="BV1wsoBY8Ed6">
+                <img class="card-cover" 
+                    src="https://i0.hdslb.com/bfs/archive/4a3c0f2b7354b96a8ee6812887cdc10462c5c33d.jpg" 
+                    alt="B站视频封面"
+                    onerror="this.src='https://via.placeholder.com/300x168?text=B站'">
+                <div class="card-info">                    
+                    <h4>【董卿】纯人声 朗读</h4>
+                    <p>2025-03-23</p>
+                </div>
+            </div>
+
+            
+
+            
 
 
     </main>
