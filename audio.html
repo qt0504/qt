@@ -123,6 +123,42 @@
                 </div>
             </div>
 
+            <!-- 【周涛】纪录片《中国》 -->
+            <div class="card" data-platform="ximalaya" data-url="https://www.ximalaya.com/album/121496771">
+                <img class="card-cover" src="./images/1.jpg" alt="周涛喜马拉雅主页">
+                <div class="card-info">
+                    <h4>【周涛】纪录片《中国》</h4>
+                    <p>2026-05-13</p>
+                </div>
+            </div>
+
+            <!-- 【周涛】纪录片《梦中的额吉》 -->
+            <div class="card" data-platform="ximalaya" data-url="https://www.ximalaya.com/album/121498302">
+                <img class="card-cover" src="./images/2.jpg" alt="周涛喜马拉雅主页">
+                <div class="card-info">
+                    <h4>【周涛】纪录片《梦中的额吉》</h4>
+                    <p>2026-05-13</p>
+                </div>
+            </div>
+
+            <!-- 【周涛】纪录片《百年谢晋》 -->
+            <div class="card" data-platform="ximalaya" data-url="https://www.ximalaya.com/album/121498537">
+                <img class="card-cover" src="./images/3.png" alt="周涛喜马拉雅主页">
+                <div class="card-info">
+                    <h4>【周涛】纪录片《百年谢晋》</h4>
+                    <p>2026-05-13</p>
+                </div>
+            </div>
+
+            <!-- 【周涛】纪录片《党的女儿》 -->
+            <div class="card" data-platform="ximalaya" data-url="https://www.ximalaya.com/album/121503174">
+                <img class="card-cover" src="./images/4.jpg" alt="周涛喜马拉雅主页">
+                <div class="card-info">
+                    <h4>【周涛】纪录片《党的女儿》</h4>
+                    <p>2026-05-13</p>
+                </div>
+            </div>
+
             
 
             
@@ -136,5 +172,51 @@
             <p>联系：15235513525@163.com</p>
         </div>
     </footer>
+
+    <!-- 内部js文件 -->
+    <script>
+
+        // DOM加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // B站卡片点击效果和跳转逻辑
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // 点击效果
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                    
+                    // 获取平台和视频ID
+                    const platform = this.getAttribute('data-platform');
+                    const bvid = this.getAttribute('data-bvid');
+                    const weiboId = this.getAttribute('data-weibo-id');
+                    
+                    // 根据平台跳转到对应视频
+                    if (platform === 'bilibili' && bvid) {
+                        window.open(`https://www.bilibili.com/video/${bvid}`, '_blank');
+                    } else if (platform === 'weibo' && weiboId) {
+                        window.open(`https://weibo.com/tv/show/1034:${weiboId}`, '_blank');
+                    }
+                });
+            });
+
+            // 喜马拉雅卡片：点击跳转到 data-url 指定的页面
+            document.querySelectorAll('.card[data-platform="ximalaya"]').forEach(card => {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', (e) => {
+                    // 防止点击内部 iframe 或 a 标签时误触发（目前没有内嵌元素，但保留好习惯）
+                    if (e.target.closest('a')) return;
+                    const targetUrl = card.getAttribute('data-url');
+                    if (targetUrl) {
+                        window.open(targetUrl, '_blank');
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
 </body>
 </html>
